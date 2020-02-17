@@ -2,6 +2,7 @@ package com.example.squares;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         progressBar = findViewById(R.id.progressBar);
         run = findViewById(R.id.run);
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
         enter = findViewById(R.id.answer);
 
         xs.setChecked(true);
+        t.setText("5");
+        a.setText("5");
+        amount = 5;
+        time = 5;
 
         xs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 time = Integer.parseInt(t.getText().toString());
                 amount = Integer.parseInt(a.getText().toString());
                 new MyThread();
+                RealAnswers.setText("Правильные ответы:");
+                YourAnswers.setText("Ваши ответы:");
             }
         });
     }
@@ -95,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                         Thread.sleep(time*10);
                     }
                     setParams();
+                    Thread.sleep(10);
                 }
 
 
@@ -128,10 +137,21 @@ public class MainActivity extends AppCompatActivity {
             }
             newQuestion = (Integer.toString(A)+"x"+"\u00B2"+Bs+"x"+Cs+"=0");
             setQuestion();
-            newRealAnswer = "{";
+            newRealAnswer = "{"+x1+";"+x2+"}";
         }
         public void Mode2(){
-
+            int bool, x;
+            x = (int)(11+(Math.random()*25));
+            bool = (int)(0+(Math.random()*1));
+            if(bool == 0) {
+                newRealAnswer = "{"+Integer.toString(x*x)+"}";
+                newQuestion = Integer.toString(x);
+                setQuestion();
+            }else{
+                newRealAnswer = "{"+Integer.toString(x)+"}";
+                newQuestion = Integer.toString(x*x);
+                setQuestion();
+            }
         }
     }
 
@@ -140,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                newAnswer = enter.getText().toString();
+                newAnswer = "{"+enter.getText().toString()+"}";
                 YourAnswers.setText(YourAnswers.getText()+" "+newAnswer);
                 RealAnswers.setText(RealAnswers.getText()+" "+newRealAnswer);
 

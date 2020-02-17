@@ -68,14 +68,20 @@
         android:textColor="@color/TextColor"
         android:textSize="36sp" />
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ваш ОТВЕТ(если значения 2, то вводить через какой-нибудь символ)"
+        android:textColor="@color/TextColor" />
+
     <EditText
         android:id="@+id/answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="phone"
         android:textColor="@color/colorAccent"
-        android:textSize="30sp"
-        tools:text="сюда надо писать ответ" />
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/youranswers"
@@ -89,7 +95,7 @@
         android:id="@+id/realanswers"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="правильные ответы:"
+        android:text="Правильные ответы:"
         android:textColor="@color/TextColor"
         android:textSize="14sp" />
 
